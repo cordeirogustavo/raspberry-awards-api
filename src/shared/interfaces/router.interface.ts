@@ -1,5 +1,5 @@
-import { Express } from 'express'
+import { IServer } from "./controller.interface";
 
 export interface IRouter {
-  register(server: Express): void
+  register(server: IServer): void;
 }

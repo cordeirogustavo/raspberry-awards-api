@@ -1,11 +1,16 @@
-import { Express } from "express";
 import { inject, injectable } from "tsyringe";
 
-import { IRouter } from "@/shared/interfaces";
+import { IRouter, IServer } from "@/shared/interfaces";
+
+import { HealthSymbols } from "@/domain/health";
 
 @injectable()
 export class AppRouter implements IRouter {
-  constructor() {}
+  constructor(
+    @inject(HealthSymbols.HealthRouter) private healthRouter: IRouter
+  ) {}
 
-  public register(server: Express) {}
+  public register(server: IServer) {
+    this.healthRouter.register(server);
+  }
 }

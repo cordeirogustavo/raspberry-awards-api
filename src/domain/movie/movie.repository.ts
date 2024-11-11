@@ -6,11 +6,6 @@ import { IDatabaseConnectionProvider } from "@/shared/providers/database-provide
 
 @singleton()
 export class MovieRepository implements IMovieRepository {
-  static queries = {
-    dirname: __dirname,
-    files: [],
-  };
-
   constructor(
     @inject(ProvidersSymbols.DatabaseConnectionProvider)
     protected databaseConnectionProvider: IDatabaseConnectionProvider
@@ -34,6 +29,19 @@ export class MovieRepository implements IMovieRepository {
       movie.producers,
       movie.winner,
     ];
+    return await this.databaseConnectionProvider.createQuery(query, params);
+  }
+
+  async createMany(movies: TMovie[]): Promise<void> {
+    const placeholders = movies.map(() => "(?, ?, ?, ?, ?)").join(", ");
+    const query = `INSERT INTO movies (year, title, studios, producers, winner) VALUES ${placeholders}`;
+    const params = movies.flatMap((movie) => [
+      movie.year,
+      movie.title,
+      movie.studios,
+      movie.producers,
+      movie.winner,
+    ]);
     return await this.databaseConnectionProvider.runQuery(query, params);
   }
 }

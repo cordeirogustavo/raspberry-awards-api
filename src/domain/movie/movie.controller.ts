@@ -28,4 +28,9 @@ export class MovieController implements IMovieController {
     });
     return response.status(201).send({ id });
   };
+
+  import: IHandle<void, void> = async (_, response) => {
+    await this.moviesService.import();
+    return response.status(200).send();
+  };
 }

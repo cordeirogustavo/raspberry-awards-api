@@ -10,10 +10,10 @@ export class SQLiteProvider {
     this.db = new sqlite3.Database(":memory:", (err) => {
       if (err) {
         console.error("Failed to connect to database:", err.message);
-      } else {
-        console.log("Connected successfully to SQLite Memory.");
-        this.initialize();
+        return;
       }
+      console.log("Connected successfully to SQLite Memory.");
+      this.initialize();
     });
   }
 

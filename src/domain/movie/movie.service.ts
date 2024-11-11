@@ -13,7 +13,9 @@ export class MovieService implements IMovieService {
     private readonly movieRepository: IMovieRepository,
     @inject(CsvReaderSymbols.CsvReaderService)
     private readonly csvReaderService: ICsvReader<TMovie>
-  ) {}
+  ) {
+    this.import();
+  }
 
   async list(): Promise<TMovie[]> {
     return await this.movieRepository.list();
@@ -29,8 +31,6 @@ export class MovieService implements IMovieService {
       movieSchema,
       false
     );
-
     await this.movieRepository.createMany(imports.validData);
-    console.log(imports.importErrors);
   }
 }

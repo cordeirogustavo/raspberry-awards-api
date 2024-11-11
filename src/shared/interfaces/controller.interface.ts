@@ -1,13 +1,6 @@
-import {
-  NextFunction,
-  Request,
-  RequestHandler,
-  Response,
-  Express,
-} from "express";
+import { NextFunction, Request, Response, Express } from "express";
 
 export interface IRequest<T> extends Request {
-  parsed: T;
   query: Record<string, any>;
   params: Record<string, string>;
   body: Record<string, any>;

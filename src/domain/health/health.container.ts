@@ -7,6 +7,8 @@ import { HealthRouter } from "./health.router";
 import { HealthSymbols } from "./health.symbols";
 
 export class HealthContainer implements Partial<IContainer> {
+  constructor() {}
+
   static register(container: DependencyContainer): void {
     container.register<IHealthController>(
       HealthSymbols.HealthController,

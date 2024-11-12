@@ -5,15 +5,14 @@ import { singleton } from "tsyringe";
 @singleton()
 export class SQLiteProvider {
   private db: sqlite3.Database;
-
   constructor() {
-    this.db = new sqlite3.Database(":memory:", (err) => {
+    this.db = new sqlite3.Database(":memory:", async (err) => {
       if (err) {
         console.error("Failed to connect to database:", err.message);
         return;
       }
       console.log("Connected successfully to SQLite Memory.");
-      this.initialize();
+      await this.initialize();
     });
   }
 

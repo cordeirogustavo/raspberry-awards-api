@@ -43,9 +43,9 @@ export class ProducerRepository implements IProducerRepository {
 
         SELECT 
           w.producer,
+          w.interval,
           w.previousWin,
           w.followingWin,
-          w.interval,
           CASE 
             WHEN w.interval = mm.min_interval THEN 'min'
             WHEN w.interval = mm.max_interval THEN 'max'

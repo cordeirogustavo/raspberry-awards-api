@@ -14,12 +14,14 @@ export class MovieService implements IMovieService {
     @inject(CsvReaderSymbols.CsvReaderService)
     private readonly csvReaderService: ICsvReader<TMovie>
   ) {
-    this.import();
+    if (process.env.NODE_ENV !== "test") {
+      this.import("/database/movielist.csv");
+    }
   }
 
-  async import(): Promise<void> {
+  async import(filePath: string): Promise<void> {
     const imports = await this.csvReaderService.getData(
-      "/database/movielist.csv",
+      filePath,
       movieSchema,
       false
     );

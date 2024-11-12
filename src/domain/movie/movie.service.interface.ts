@@ -1,3 +1,3 @@
 export interface IMovieService {
-  import(): Promise<void>;
+  import(filePath: string): Promise<void>;
 }

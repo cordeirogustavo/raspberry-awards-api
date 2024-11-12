@@ -17,14 +17,6 @@ export class MovieService implements IMovieService {
     this.import();
   }
 
-  async list(): Promise<TMovie[]> {
-    return await this.movieRepository.list();
-  }
-
-  async create(movie: TMovie): Promise<number> {
-    return await this.movieRepository.create(movie);
-  }
-
   async import(): Promise<void> {
     const imports = await this.csvReaderService.getData(
       "/database/movielist.csv",

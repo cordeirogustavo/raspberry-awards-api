@@ -11,27 +11,6 @@ export class MovieRepository implements IMovieRepository {
     protected databaseConnectionProvider: IDatabaseConnectionProvider
   ) {}
 
-  async list(): Promise<TMovie[]> {
-    const movies = this.databaseConnectionProvider.getAll(
-      "SELECT * FROM movies",
-      []
-    );
-    return movies;
-  }
-
-  async create(movie: TMovie): Promise<number> {
-    const query =
-      "INSERT INTO movies (year, title, studios, producers, winner) VALUES (?, ?, ?, ?, ?)";
-    const params = [
-      movie.year,
-      movie.title,
-      movie.studios,
-      movie.producers,
-      movie.winner,
-    ];
-    return await this.databaseConnectionProvider.createQuery(query, params);
-  }
-
   async createMany(movies: TMovie[]): Promise<void> {
     const placeholders = movies.map(() => "(?, ?, ?, ?, ?)").join(", ");
     const query = `INSERT INTO movies (year, title, studios, producers, winner) VALUES ${placeholders}`;

@@ -12,9 +12,5 @@ export class MovieRouter implements IRouter {
     private movieController: IMovieController
   ) {}
 
-  public register(server: IServer): void {
-    server.get(PREFIX, this.movieController.getAllMovies);
-    server.post(PREFIX, this.movieController.createMovie);
-    server.get(`${PREFIX}/import`, this.movieController.import);
-  }
+  public register(server: IServer): void {}
 }

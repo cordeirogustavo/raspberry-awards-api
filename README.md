@@ -1,6 +1,6 @@
 # Raspberry Awards Api
 
-This is a scalable and modular API using **Express**, **TypeScript**, and **Tsyringe** (Dependency Injection). It also includes **Vitest** for testing and **Zod** for schema validation.
+This is a scalable and modular API using **Express**, **TypeScript**, and **Tsyringe** (Dependency Injection). It also includes **Vitest** for testing, **Zod** for schema validation and **SQLite** for database in memory.
 
 When you start the API, it will read the `movielist.csv` file located at `src/database/movielist.csv`. This file should include the following columns:
 
@@ -29,6 +29,7 @@ These will be considered different producers.
 - **Tsyringe** - Dependency Injection library for TypeScript
 - **Zod** - Schema validation
 - **Vitest** - Testing framework
+- **SQLite** - Database in memory
 
 ## Project Structure
 
@@ -155,8 +156,8 @@ src/
 
 ### Endpoint Usage
 
-To access the `awards-interval` endpoint, make a GET request to:
+To access the `awards-interval/range` endpoint, make a GET request to:
 
-[`http://localhost:3000/awards-interval`](http://localhost:3000/awards-interval)
+[`http://localhost:3000/awards-interval/range`](http://localhost:3000/awards-interval)
 
 Ensure the API is running on port `3000` before calling this endpoint.

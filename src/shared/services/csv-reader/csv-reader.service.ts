@@ -51,20 +51,9 @@ export class CsvReaderService<T> implements ICsvReader<T> {
         return reject(new AppError("File not found", 404));
       }
       fs.createReadStream(fileDir)
-        .pipe(csv())
+        .pipe(csv({ separator: ";" }))
         .on("data", (data) => {
-          const [rawHeaders] = Object.keys(data);
-          const [rawValues]: string[] = Object.values(data);
-
-          const headers = rawHeaders.split(";");
-          const values = rawValues.split(";");
-
-          const parsedRow = headers.reduce((acc: any, header, index) => {
-            acc[header.trim()] = values[index] ? values[index].trim() : null;
-            return acc;
-          }, {});
-
-          results.push(parsedRow);
+          results.push(data);
         })
         .on("end", () => resolve(results))
         .on("error", (err) => reject(new AppError(err.message, 400)));

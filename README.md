@@ -158,6 +158,6 @@ src/
 
 To access the `awards-interval/range` endpoint, make a GET request to:
 
-[`http://localhost:3000/awards-interval/range`](http://localhost:3000/awards-interval)
+[`http://localhost:3000/producer/awards-intervals/range`](http://localhost:3000/producer/awards-intervals/range)
 
 Ensure the API is running on port `3000` before calling this endpoint.

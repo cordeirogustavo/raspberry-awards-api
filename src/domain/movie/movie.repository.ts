@@ -11,6 +11,11 @@ export class MovieRepository implements IMovieRepository {
     protected databaseConnectionProvider: IDatabaseConnectionProvider
   ) {}
 
+  async getAllMovies(): Promise<TMovie[] | []> {
+    const query = `SELECT * FROM movies`;
+    return await this.databaseConnectionProvider.getAll(query, []);
+  }
+
   async createMany(movies: TMovie[]): Promise<void> {
     const placeholders = movies.map(() => "(?, ?, ?, ?, ?)").join(", ");
     const query = `INSERT INTO movies (year, title, studios, producers, winner) VALUES ${placeholders}`;
@@ -22,5 +27,10 @@ export class MovieRepository implements IMovieRepository {
       movie.winner,
     ]);
     return await this.databaseConnectionProvider.runQuery(query, params);
+  }
+
+  async clear(): Promise<void> {
+    const query = `DELETE FROM movies`;
+    return await this.databaseConnectionProvider.runQuery(query, []);
   }
 }

@@ -10,13 +10,13 @@ import { AppError } from "@/shared/errors";
 export class CsvReaderService<T> implements ICsvReader<T> {
   public async getData<T>(
     filePath: string,
-    schemaValidation: z.ZodSchema,
+    schemaValidation: z.ZodSchema | null,
     validate: boolean = false
   ): Promise<TCsvData<T>> {
     const data = await this.parseCSV(filePath);
     const importErrors: string[] = [];
 
-    if (!validate) {
+    if (!validate || !schemaValidation) {
       return { validData: data, importErrors };
     }
 

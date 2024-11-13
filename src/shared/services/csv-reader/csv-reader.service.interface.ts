@@ -8,7 +8,7 @@ export type TCsvData<T> = {
 export interface ICsvReader<T> {
   getData(
     filePath: string,
-    schemaValidation: z.ZodSchema,
+    schemaValidation: z.ZodSchema | null,
     validate: boolean
   ): Promise<TCsvData<T>>;
 }

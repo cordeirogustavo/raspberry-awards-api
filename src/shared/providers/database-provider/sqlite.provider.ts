@@ -7,11 +7,11 @@ export class SQLiteProvider {
   private db: sqlite3.Database;
   constructor() {
     this.db = new sqlite3.Database(":memory:", async (err) => {
+      // this.db = new sqlite3.Database("database.sqlite", async (err) => {
       if (err) {
         console.error("Failed to connect to database:", err.message);
         return;
       }
-      console.log("Connected successfully to SQLite Memory.");
       await this.initialize();
     });
   }
@@ -27,7 +27,6 @@ export class SQLiteProvider {
         winner TEXT
       );
     `);
-    console.log("Tables created successfully.");
   }
 
   public async createQuery(query: string, params: any[] = []): Promise<number> {
@@ -89,7 +88,6 @@ export class SQLiteProvider {
         console.error("Failed to close database connection:", err.message);
         return;
       }
-      console.log("Database connection closed successfully.");
     });
   }
 }

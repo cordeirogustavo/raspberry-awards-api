@@ -7,7 +7,6 @@ export class SQLiteProvider {
   private db: sqlite3.Database;
   constructor() {
     this.db = new sqlite3.Database(":memory:", async (err) => {
-      // this.db = new sqlite3.Database("database.sqlite", async (err) => {
       if (err) {
         console.error("Failed to connect to database:", err.message);
         return;
@@ -20,7 +19,7 @@ export class SQLiteProvider {
     await this.runQuery(`
       CREATE TABLE IF NOT EXISTS movies (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        year INTEGER NOT NULL,
+        year INTEGER,
         title TEXT,
         studios TEXT,
         producers TEXT,

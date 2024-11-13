@@ -25,6 +25,11 @@ export class MovieService implements IMovieService {
       movieSchema,
       false
     );
+    if (!imports.validData.length) return;
     await this.movieRepository.createMany(imports.validData);
+  }
+
+  async getAllMovies(): Promise<TMovie[] | []> {
+    return await this.movieRepository.getAllMovies();
   }
 }

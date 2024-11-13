@@ -60,9 +60,7 @@ export class CsvReaderService<T> implements ICsvReader<T> {
       }
       fs.createReadStream(fileDir)
         .pipe(csv({ separator: ";" }))
-        .on("data", (data) => {
-          results.push(data);
-        })
+        .on("data", (data) => results.push(data))
         .on("end", () => resolve(results))
         .on("error", (err) => reject(new AppError(err.message, 400)));
     });

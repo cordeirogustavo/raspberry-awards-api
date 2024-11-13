@@ -13,6 +13,7 @@ export class ProducerService implements IProducerService {
 
   async getAwardsInterval(): Promise<TProducerAwardsIntervalDTO> {
     const awards = await this.producerRepository.getMinMaxProducersAwards();
+
     const awardsResponse: TProducerAwardsIntervalDTO = {
       min: [],
       max: [],

@@ -12,7 +12,7 @@ export class MovieController implements IMovieController {
   ) {}
 
   import: IHandle<void, void> = async (_, response) => {
-    await this.moviesService.import();
+    await this.moviesService.import("/database/movielist.csv");
     return response.status(200).send();
   };
 }

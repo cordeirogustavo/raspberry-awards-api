@@ -57,9 +57,9 @@ export class ProducerRepository implements IProducerRepository {
 
       ranked_wins AS (
         SELECT 
-         TRIM(REPLACE(REPLACE(producer, ' and ', ''), 'and ', ''))  AS producer,
-          year                                                      AS win_year,
-          ROW_NUMBER() OVER (PARTITION BY producer ORDER BY year)   AS row_num
+         TRIM(REPLACE(REPLACE(producer, ' and ', ''), 'and ', ''))       AS producer,
+          year AS win_year,
+          ROW_NUMBER() OVER (PARTITION BY LOWER(producer) ORDER BY year) AS row_num
         FROM split_producers
       ),
 

@@ -48,7 +48,15 @@ export class CsvReaderService<T> implements ICsvReader<T> {
       const fileDir = local.join(__dirname, "../../..", filePath);
 
       if (!fs.existsSync(fileDir)) {
-        return reject(new AppError("File not found", 404));
+        console.error(
+          `********* File not found, insert a valid file with required name in path: src${filePath} *********`
+        );
+        return reject(
+          new AppError(
+            `File not found, insert a valid file with required name in path: src${filePath}`,
+            404
+          )
+        );
       }
       fs.createReadStream(fileDir)
         .pipe(csv({ separator: ";" }))

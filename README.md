@@ -12,7 +12,7 @@ When you start the API, it will read the `movielist.csv` file located at `src/da
 
 ### Producers Column
 
-In the `producers` column, each producer will be considered individually. If there are multiple producers in the same cell, they will be counted separately in the `awards-interval` endpoint. Producers should be separated by commas (`,`) and/or "and".
+In the `producers` column, each producer will be considered individually. If there are multiple producers in the same cell, they will be counted separately in the `awards-interval` endpoint. Producers should be separated by commas (`,`) and/or (`and`).
 
 > **Note**: Producers with different name formats will be treated as distinct individuals. For example:
 

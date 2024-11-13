@@ -1,6 +1,25 @@
-# Express API Boilerplate
+# Raspberry Awards Api
 
-This is a scalable and modular boilerplate for building APIs using **Express**, **TypeScript**, and **Tsyringe** (Dependency Injection). It also includes **Vitest** for testing and **Zod** for schema validation.
+This is a scalable and modular API using **Express**, **TypeScript**, and **Tsyringe** (Dependency Injection). It also includes **Vitest** for testing and **Zod** for schema validation.
+
+When you start the API, it will read the `movielist.csv` file located at `src/database/movielist.csv`. This file should include the following columns:
+
+- **year**
+- **title**
+- **studios**
+- **producers**
+- **winner**
+
+### Producers Column
+
+In the `producers` column, each producer will be considered individually. If there are multiple producers in the same cell, they will be counted separately in the `awards-interval` endpoint. Producers should be separated by commas (`,`) and/or "and".
+
+> **Note**: Producers with different name formats will be treated as distinct individuals. For example:
+
+> - Gustavo De Abreu Cordeiro
+> - Gustavo DeAbreu Cordeiro
+
+These will be considered different producers.
 
 ## Stack
 
@@ -42,7 +61,7 @@ src/
 │   │    ├── movie.service.ts                # Service (use-case)
 │   │    └── movie.symbols.ts                # Symbols for dependency injection
 │   │    └── movie.types.ts                  # Domain types
-│   └── producer/               # Producer module
+│   └── producer/                # Producer module
 │   │    └── tests/              # Tests
 │   │    │  ├── producer.controller.spec.ts      # Controller test file
 │   │    │  ├── producer.repository.spec.ts      # Repository test file
@@ -133,3 +152,11 @@ src/
    ```bash
    npm run build
    ```
+
+### Endpoint Usage
+
+To access the `awards-interval` endpoint, make a GET request to:
+
+[`http://localhost:3000/awards-interval`](http://localhost:3000/awards-interval)
+
+Ensure the API is running on port `3000` before calling this endpoint.

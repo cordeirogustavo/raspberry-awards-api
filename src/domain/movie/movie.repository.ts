@@ -12,8 +12,28 @@ export class MovieRepository implements IMovieRepository {
   ) {}
 
   async getAllMovies(): Promise<TMovie[] | []> {
-    const query = `SELECT * FROM movies`;
+    const query = `SELECT
+                    CAST(year AS TEXT) AS year, 
+                    title, 
+                    studios, 
+                    producers, 
+                    winner 
+                  FROM movies`;
     return await this.databaseConnectionProvider.getAll(query, []);
+  }
+
+  async getMovieByProducer(producers: string): Promise<TMovie[] | []> {
+    const query = `SELECT
+                    CAST(year AS TEXT) AS year, 
+                    title, 
+                    studios, 
+                    producers, 
+                    winner 
+                  FROM movies
+                  WHERE LOWER(producers) = ?`;
+    return await this.databaseConnectionProvider.getAll(query, [
+      producers.toLocaleLowerCase(),
+    ]);
   }
 
   async createMany(movies: TMovie[]): Promise<void> {

@@ -32,7 +32,7 @@ export class SQLiteProvider {
 
   private async ensureInitialized(): Promise<void> {
     await this.initPromise;
-  } 
+  }
 
   public async createQuery(query: string, params: any[] = []): Promise<number> {
     await this.ensureInitialized();

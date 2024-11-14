@@ -8,6 +8,7 @@ import { CsvReaderSymbols, ICsvReader } from "@/shared/services/csv-reader";
 import { TMovie } from "../movie.types";
 
 describe("MovieRepository", () => {
+  const CSV_COUNT_OF_MOVIES = 206;
   let movieRepository: IMovieRepository;
   let csvReaderService: ICsvReader<TMovie>;
   let databaseConnectionProvider: IDatabaseConnectionProvider;
@@ -35,14 +36,8 @@ describe("MovieRepository", () => {
   });
 
   it("should return same movies count in database as in csv", async () => {
-    const csvData = await csvReaderService.getData(
-      "/mocks/mocked-movie-data.csv",
-      null,
-      false
-    );
-
     expect((await movieRepository.getAllMovies()).length).toEqual(
-      csvData.validData.length
+      CSV_COUNT_OF_MOVIES
     );
   });
 
@@ -55,7 +50,37 @@ describe("MovieRepository", () => {
     );
     await movieRepository.createMany(csvData.validData);
     expect((await movieRepository.getAllMovies()).length).toEqual(
-      csvData.validData.length
+      CSV_COUNT_OF_MOVIES
+    );
+  });
+
+  it("should return same movies in database as in mocked csv", async () => {
+    const csvData = await csvReaderService.getData(
+      "/mocks/mocked-movie-data.csv",
+      null,
+      false
+    );
+    expect(await movieRepository.getAllMovies()).toEqual(csvData.validData);
+  });
+
+  it("should return an empty array when no producers are found", async () => {
+    expect(
+      await movieRepository.getMovieByProducer("not-existing-producers")
+    ).toEqual([]);
+  });
+
+  it("should return a array with movies when producers are found", async () => {
+    const expectedResult = [
+      {
+        producers: "Hank Moonjean",
+        studios: "Warner Bros., Universal Studios",
+        title: "Stroker Ace",
+        winner: "",
+        year: "1983",
+      },
+    ];
+    expect(await movieRepository.getMovieByProducer("Hank Moonjean")).toEqual(
+      expectedResult
     );
   });
 

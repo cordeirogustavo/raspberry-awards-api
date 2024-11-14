@@ -105,6 +105,7 @@ src/
 │   │   │   ├── csv-reader.service.ts                     # CSV Reader service
 │   │   ├── services.container.ts                         # Service container register
 │   │   └── services.symbols.ts                           # Symbols to register dependency injection
+├── app.ts                      # Express app
 ├── server.ts                   # Server start
 ├── .gitignore                  # Ignored files to git repository
 ├── .nvmrc                      # NVM Node version
@@ -156,7 +157,7 @@ src/
 
 ### Endpoint Usage
 
-To access the `awards-interval/range` endpoint, make a GET request to:
+To access the `producer/awards-interval/range` endpoint, make a GET request to:
 
 [`http://localhost:3000/producer/awards-intervals/range`](http://localhost:3000/producer/awards-intervals/range)
 
